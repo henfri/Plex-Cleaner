@@ -422,6 +422,16 @@ def performAction(file, action, media_id=0, location=""):
                 os.unlink(f)
         MoveCount += 1
         return True
+    elif action.startswith('e'):
+        for deleteFile in filelist:
+            try:
+                open(deleteFile, 'w').close()
+                log("**[EMPTIED] " + deleteFile)
+            except Exception as e:
+                log("Error emptying file: %s" % e, True)
+                continue
+        DeleteCount += 1
+        return True
     elif action.startswith('d'):
         for deleteFile in filelist:
             try:
